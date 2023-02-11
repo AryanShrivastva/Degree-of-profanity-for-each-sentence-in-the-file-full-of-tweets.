@@ -1,0 +1,30 @@
+def profanity_score(tweet, slurs):
+    """Calculates the degree of profanity in a tweet.
+
+    The degree of profanity is defined as the number of racial slurs found in the tweet.
+
+    Args:
+    tweet: str, the tweet to be analyzed
+    slurs: list of str, the list of racial slurs
+
+    Returns:
+    int, the degree of profanity in the tweet.
+    """
+    return sum(1 for slur in slurs if slur in tweet.lower())
+
+def analyze_tweets(filename, slurs):
+    """Analyzes the tweets in a file and returns the profanity scores for each tweet.
+
+    Args:
+    filename: str, the name of the file containing the tweets.
+    slurs: list of str, the list of racial slurs
+
+    Returns:
+    list of int, the profanity score for each tweet.
+    """
+    with open(filename, 'r') as f:
+        return [profanity_score(line, slurs) for line in f]
+
+slurs = ["racial slur1", "racial slur2", "racial slur3"]
+scores = analyze_tweets("tweets.txt", slurs)
+print(scores)
